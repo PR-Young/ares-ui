@@ -46,6 +46,15 @@ export function rejectTask(data) {
   })
 }
 
+// 驳回任务
+export function rejectTaskNew(data) {
+  return request({
+    url: '/ares/flowable/task/rejectnew',
+    method: 'post',
+    data: data
+  })
+}
+
 // 可退回任务列表
 export function returnList(data) {
   return request({

@@ -68,7 +68,7 @@ export default {
     }
   },
   watch: {
-    'formData.conditionExpression': function(val) {
+    'formData.conditionExpression': function(val) {debugger
       if (val) {
         const newCondition = this.modeler.get('moddle').create('bpmn:FormalExpression', { body: val })
         this.updateProperties({ conditionExpression: newCondition })

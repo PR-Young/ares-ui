@@ -24,7 +24,7 @@
             @click="handleComplete"
             >审批</el-button
           >
-          <el-button
+          <!-- <el-button
             icon="el-icon-edit-outline"
             type="primary"
             size="mini"
@@ -44,7 +44,7 @@
             size="mini"
             @click="handleDelegate"
             >签收</el-button
-          >
+          > -->
           <el-button
             icon="el-icon-refresh-left"
             type="warning"
@@ -57,6 +57,13 @@
             type="danger"
             size="mini"
             @click="handleReject"
+            >驳回到上一节点</el-button
+          >
+          <el-button
+            icon="el-icon-circle-close"
+            type="danger"
+            size="mini"
+            @click="handleRejectNew"
             >驳回</el-button
           >
         </div>
@@ -155,68 +162,17 @@
       width="60%"
       append-to-body
     >
-      <el-row :gutter="20">
-        <!--部门数据-->
-        <el-col :span="6" :xs="24">
-          <h6>部门列表</h6>
-          <div class="head-container">
-            <el-input
-              v-model="deptName"
-              placeholder="请输入部门名称"
-              clearable
-              size="small"
-              prefix-icon="el-icon-search"
-              style="margin-bottom: 20px"
-            />
-          </div>
-          <div class="head-container">
-            <el-tree
-              :data="deptOptions"
-              :props="defaultProps"
-              :expand-on-click-node="false"
-              :filter-node-method="filterNode"
-              ref="tree"
-              default-expand-all
-              @node-click="handleNodeClick"
-            />
-          </div>
-        </el-col>
-        <el-col :span="10" :xs="24">
-          <h6>待选人员</h6>
-          <el-table
-            ref="singleTable"
-            :data="userList"
-            border
-            style="width: 100%"
-            @selection-change="handleSelectionChange"
-          >
-            <el-table-column type="selection" width="50" align="center" />
-            <el-table-column label="用户名" align="center" prop="userName" />
-            <!-- <el-table-column label="部门" align="center" prop="dept.deptName" /> -->
-          </el-table>
-        </el-col>
-        <el-col :span="8" :xs="24">
-          <h6>已选人员</h6>
-          <el-tag
-            v-for="tag in userData"
-            :key="tag.userName"
-            closable
-            @close="handleClose(tag)"
-          >
-            {{ tag.userName }}
-            <!-- {{ tag.dept.deptName }} -->
-          </el-tag>
-        </el-col>
-      </el-row>
+    <el-row
+    ><el-col>
+      <el-input
+        type="textarea"
+        v-model="taskForm.comment"
+        placeholder="请输入处理意见"
+      />
+    </el-col>
+    </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-row
-          ><el-col>
-            <el-input
-              type="textarea"
-              v-model="taskForm.comment"
-              placeholder="请输入处理意见"
-            />
-          </el-col>
+        <el-row>
           <el-col style="margin-top: 5px">
             <el-button @click="completeOpen = false">取 消</el-button>
             <el-button type="primary" @click="taskComplete">确 定</el-button>
@@ -249,7 +205,7 @@
           :rules="[{ required: true, message: '请输入意见', trigger: 'blur' }]"
         >
           <el-input
-            style="width: 50%"
+            style="width: 100%"
             type="textarea"
             v-model="taskForm.comment"
             placeholder="请输入意见"
@@ -276,7 +232,7 @@
           :rules="[{ required: true, message: '请输入意见', trigger: 'blur' }]"
         >
           <el-input
-            style="width: 50%"
+            style="width: 100%"
             type="textarea"
             v-model="taskForm.comment"
             placeholder="请输入意见"
@@ -288,6 +244,33 @@
         <el-button type="primary" @click="taskReject">确 定</el-button>
       </span>
     </el-dialog>
+
+     <!--驳回流程new-->
+     <el-dialog
+     :title="rejectTitle"
+     :visible.sync="rejectOpenNew"
+     width="40%"
+     append-to-body
+   >
+     <el-form ref="taskForm" :model="taskForm" label-width="80px">
+       <el-form-item
+         label="意见"
+         prop="comment"
+         :rules="[{ required: true, message: '请输入意见', trigger: 'blur' }]"
+       >
+         <el-input
+           style="width: 100%"
+           type="textarea"
+           v-model="taskForm.comment"
+           placeholder="请输入意见"
+         />
+       </el-form-item>
+     </el-form>
+     <span slot="footer" class="dialog-footer">
+       <el-button @click="rejectOpenNew = false">取 消</el-button>
+       <el-button type="primary" @click="taskRejectNew">确 定</el-button>
+     </span>
+   </el-dialog>
   </div>
 </template>
 
@@ -308,6 +291,7 @@ import {
   getNextFlowNode,
   delegate,
   getFormData,
+  rejectTaskNew
 } from "@/api/flowable/todo";
 import flow from "@/views/flowable/task/record/flow";
 import { treeselect } from "@/api/system/dept";
@@ -380,6 +364,7 @@ export default {
       rejectOpen: false,
       rejectTitle: null,
       userData: [],
+      rejectOpenNew:false
     };
   },
   created() {
@@ -566,14 +551,11 @@ export default {
     },
     /** 审批任务 */
     taskComplete() {
-      if (!this.taskForm.values) {
-        this.msgError("请选择流程接收人员");
-        return;
-      }
-      if (!this.taskForm.comment) {
-        this.msgError("请输入审批意见");
-        return;
-      }
+      // if (!this.taskForm.comment) {
+      //   this.msgError("请输入审批意见");
+      //   return;
+      // }
+      this.taskForm.values = {'approve':'同意'}
       complete(this.taskForm).then((response) => {
         this.msgSuccess(response.msg);
         this.goBack();
@@ -615,6 +597,7 @@ export default {
     },
     /** 申请流程表单数据提交 */
     submitForm(data) {
+      debugger
       if (data) {
         const variables = data.valData;
         const formData = data.formData;
@@ -643,6 +626,23 @@ export default {
       this.$refs["taskForm"].validate((valid) => {
         if (valid) {
           rejectTask(this.taskForm).then((res) => {
+            this.msgSuccess(res.msg);
+            this.goBack();
+          });
+        }
+      });
+    },
+    /** 驳回任务new */
+    handleRejectNew() {
+      this.rejectOpenNew = true;
+      this.rejectTitle = "驳回流程";
+    },
+    /** 驳回任务 */
+    taskRejectNew() {
+      this.$refs["taskForm"].validate((valid) => {
+        if (valid) {debugger
+          this.taskForm.values = {'approve':'拒绝'}
+          rejectTaskNew(this.taskForm).then((res) => {
             this.msgSuccess(res.msg);
             this.goBack();
           });
