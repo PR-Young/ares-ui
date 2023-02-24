@@ -4,6 +4,8 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
+
+const notLogin = ["未能读取到有效Token", "Token无效", "Token已过期", "Token已被顶下线", "Token已被踢下线", "当前会话未登录"]
 // 创建axios实例
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
@@ -54,13 +56,31 @@ service.interceptors.response.use(res => {
       }
       location.reload()
     } else {
-      Notification.error({
-        title: res.data.code,
-        message: res.data.msg,
-        type: 'error',
-        showClose: true
-      })
-      return Promise.reject('error')
+      let msg = (res.data.msg).split("：");
+      if (notLogin.includes(msg[0])) {
+        MessageBox.confirm(
+          '登录状态已过期，您可以继续留在该页面，或者重新登录',
+          '系统提示',
+          {
+            confirmButtonText: '重新登录',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }
+        ).then(() => {
+          store.dispatch('LogOut').then(() => {
+            location.hash = '/login'
+            location.reload() // 为了重新实例化vue-router对象 避免bug
+          })
+        })
+      } else {
+        Notification.error({
+          title: res.data.code,
+          message: res.data.msg,
+          type: 'error',
+          showClose: true
+        })
+        return Promise.reject('error')
+      }
     }
   } else {
     return res.data
