@@ -74,7 +74,7 @@ service.interceptors.response.use(res => {
         })
       } else {
         Notification.error({
-          title: res.data.code,
+          //title: res.data.code,
           message: res.data.msg,
           type: 'error',
           showClose: true

@@ -353,7 +353,7 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.id);
+      this.ids = selection.map((item) => item.procInsId);
       this.single = selection.length !== 1;
       this.multiple = !selection.length;
     },
@@ -434,8 +434,8 @@ export default {
       });
     },
     /** 删除按钮操作 */
-    handleDelete(row) {
-      const ids = row.id || this.ids;
+    handleDelete(row) {debugger
+      const ids = row.procInsId || this.ids;
       this.$confirm(
         '是否确认删除流程定义编号为"' + ids + '"的数据项?',
         "警告",
