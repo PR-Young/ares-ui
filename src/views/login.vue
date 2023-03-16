@@ -173,7 +173,7 @@ export default {
             .dispatch("Login", this.loginForm)
             .then(() => {
               // this.$router.push({ path: this.redirect || "/" });
-              this.$router.push({ path: "/home/index" });
+              this.$router.push({ path: "/index" });
             })
             .catch(() => {
               this.loading = false;

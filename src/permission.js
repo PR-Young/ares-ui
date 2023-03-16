@@ -1,20 +1,20 @@
 import router from './router'
 import store from './store'
-import {Message} from 'element-ui'
+import { Message } from 'element-ui'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import {getToken} from '@/utils/auth'
+import { getToken } from '@/utils/auth'
 
-NProgress.configure({showSpinner: false})
+NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login', '/auth-redirect', '/bind', '/register', '/blog', '/tag', '/archives', '/details', '/updateinfo']
+const whiteList = ['/login', '/auth-redirect', '/bind', '/register', '/mypage', '/blog', '/tag', '/archives', '/details', '/updateinfo']
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if (getToken()) {
     /* has token*/
     if (to.path === '/login') {
-      next({path: '/home/index'})
+      next({ path: '/index' })
       NProgress.done()
     } else {
       if (store.getters.roles.length === 0) {
@@ -23,19 +23,19 @@ router.beforeEach((to, from, next) => {
           store.dispatch('GetNoticeNumber');
           // 拉取user_info
           const roles = res.roles
-          store.dispatch('GenerateRoutes', {roles}).then(accessRoutes => {
+          store.dispatch('GenerateRoutes', { roles }).then(accessRoutes => {
             // 测试 默认静态页面
             //store.dispatch('permission/generateRoutes', { roles }).then(accessRoutes => {
             // 根据roles权限生成可访问的路由表
             router.addRoutes(accessRoutes) // 动态添加可访问路由表
-            next({...to, replace: true}) // hack方法 确保addRoutes已完成
+            next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
           })
         }).catch(err => {
           console.log(err)
           // 在request中已经判断用户是否登录，拉取用户信息失败一般是没有登录，所以在此可以不用一下操作
           store.dispatch('FedLogOut').then(() => {
             Message.error(err)
-            next({path: '/login'})
+            next({ path: '/login' })
           })
         })
       } else {
@@ -50,6 +50,7 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
+    debugger
     // 没有token
     if (whiteList.indexOf(to.path) !== -1 || to.path.indexOf("/details") !== -1) {
       // 在免登录白名单，直接进入
