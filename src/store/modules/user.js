@@ -9,7 +9,8 @@ const user = {
         avatar: '',
         roles: [],
         permissions: [],
-        notice: 0
+        notice: 0,
+        account: ''
     },
 
     mutations: {
@@ -30,6 +31,9 @@ const user = {
         },
         SET_NOTICE_NUM: (state, notice) => {
             state.notice = notice
+        },
+        SET_ACCOUNT: (state, account) => {
+            state.account = account
         }
     },
 
@@ -67,6 +71,7 @@ const user = {
                     }
                     commit('SET_NAME', user.userName)
                     commit('SET_AVATAR', avatar)
+                    commit('SET_ACCOUNT', user.account)
                     resolve(res)
                 }).catch(error => {
                     reject(error)
@@ -107,6 +112,9 @@ const user = {
                     reject(error)
                 })
             })
+        },
+        updateNoticeNumber({ commit }, data) {
+            commit('SET_NOTICE_NUM', data)
         },
     }
 }

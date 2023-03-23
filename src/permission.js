@@ -50,7 +50,6 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    debugger
     // 没有token
     if (whiteList.indexOf(to.path) !== -1 || to.path.indexOf("/details") !== -1) {
       // 在免登录白名单，直接进入
