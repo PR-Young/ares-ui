@@ -38,3 +38,4 @@ target/
 ### VS Code ###
 .vscode/
 node_modules/
+package-lock.json
