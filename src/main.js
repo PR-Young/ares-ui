@@ -15,14 +15,15 @@ import permission from './directive/permission'
 
 import './assets/icons' // icon
 import './permission' // permission control
-import {getDicts} from "@/api/system/dict/data";
-import {getConfigKey} from "@/api/system/config";
-import {addDateRange, download, handleTree, parseTime, resetForm, selectDictLabel} from "@/utils/ares";
+import { getDicts } from "@/api/system/dict/data";
+import { getConfigKey } from "@/api/system/config";
+import { addDateRange, download, handleTree, parseTime, resetForm, selectDictLabel } from "@/utils/ares";
 import Pagination from "@/components/Pagination";
 import VueParticles from "vue-particles";
 // markdown 注册
 import mavonEditor from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
+import VueRouter from 'vue-router'
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -35,15 +36,20 @@ Vue.prototype.download = download
 Vue.prototype.handleTree = handleTree
 
 Vue.prototype.msgSuccess = function (msg) {
-  this.$message({showClose: true, message: msg, type: "success"});
+  this.$message({ showClose: true, message: msg, type: "success" });
 }
 
 Vue.prototype.msgError = function (msg) {
-  this.$message({showClose: true, message: msg, type: "error"});
+  this.$message({ showClose: true, message: msg, type: "error" });
 }
 
 Vue.prototype.msgInfo = function (msg) {
   this.$message.info(msg);
+}
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
 }
 
 // 全局组件挂载

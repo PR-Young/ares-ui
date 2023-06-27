@@ -14,7 +14,7 @@ router.beforeEach((to, from, next) => {
   if (getToken()) {
     /* has token*/
     if (to.path === '/login') {
-      next({ path: '/index' })
+      next({ path: '/' })
       NProgress.done()
     } else {
       if (store.getters.roles.length === 0) {

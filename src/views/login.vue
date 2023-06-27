@@ -15,6 +15,7 @@
           type="text"
           auto-complete="off"
           placeholder="账号"
+          :focus="focus1"
         >
           <svg-icon
             slot="prefix"
@@ -30,6 +31,7 @@
           auto-complete="off"
           placeholder="密码"
           @keyup.enter.native="handleLogin"
+          :focus="focus2"
         >
           <svg-icon
             slot="prefix"
@@ -113,6 +115,8 @@ export default {
       },
       loading: false,
       redirect: undefined,
+      focus1: false,
+      focus2: false
     };
   },
   watch: {
@@ -125,9 +129,11 @@ export default {
   },
   mounted() {
     if (this.loginForm.username === "") {
-      this.$refs.username.focus();
+      this.focus1 = true
+      //this.$refs.username.focus();
     } else if (this.loginForm.password === "") {
-      this.$refs.password.focus();
+      this.focus2 = true
+      //this.$refs.password.focus();
     }
   },
   created() {
@@ -172,8 +178,8 @@ export default {
           this.$store
             .dispatch("Login", this.loginForm)
             .then(() => {
-              // this.$router.push({ path: this.redirect || "/" });
-              this.$router.push({ path: "/index" });
+              //this.$router.push({ path: this.redirect || "/" });
+              this.$router.push({ path: "/" });
             })
             .catch(() => {
               this.loading = false;
