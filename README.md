@@ -1,24 +1,25 @@
-## ¿ª·¢
+## è¿è¡Œé¡¹ç›®
 
 ```bash
-# °²×°ÒÀÀµ
-npm install
 
-# ½¨Òé²»ÒªÖ±½ÓÊ¹ÓÃ cnpm °²×°ÒÀÀµ£¬»áÓĞ¸÷ÖÖ¹îÒìµÄ bug¡£¿ÉÒÔÍ¨¹ıÈçÏÂ²Ù×÷½â¾ö npm ÏÂÔØËÙ¶ÈÂıµÄÎÊÌâ
+# é…ç½®æ·˜å®é•œåƒ
 npm install --registry=https://registry.npm.taobao.org
 
-# Æô¶¯·şÎñ
+# ä¸‹è½½ä¾èµ–åŒ…
+npm install
+
+# è¿è¡Œ
 npm run dev
 ```
 
-ä¯ÀÀÆ÷·ÃÎÊ http://localhost:80
+è®¿é—®åœ°å€ï¼š <http://localhost:9999>
 
-## ·¢²¼
+## éƒ¨ç½²åŒ…
 
 ```bash
-# ¹¹½¨²âÊÔ»·¾³
+# æµ‹è¯•æ‰“åŒ…
 npm run build:stage
 
-# ¹¹½¨Éú²ú»·¾³
+# ç”Ÿäº§æ‰“åŒ…
 npm run build:prod
 ```
