@@ -50,7 +50,11 @@ module.exports = {
       fallback: {
         "path": require.resolve("path-browserify")
       }
+    },
+    optimization: {
+      runtimeChunk: true
     }
+
   },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test

@@ -94,7 +94,7 @@ service.interceptors.response.use(res => {
       type: 'error',
       duration: 5 * 1000
     })
-    return Promise.reject(error)
+    return nul;
   }
 )
 

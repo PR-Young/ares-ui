@@ -130,7 +130,7 @@ export function handleTree(data, id, parentId, children, rootId) {
   rootId = rootId || '0'
   //对源数据深度克隆
   const cloneData = JSON.parse(JSON.stringify(data))
-  const treeData = ''
+  let treeData = ''
   if (cloneData) {
     //循环所有项
     treeData = cloneData.filter(father => {
