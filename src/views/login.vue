@@ -61,7 +61,7 @@
       <el-checkbox
         v-model="loginForm.rememberMe"
         style="margin: 0px 0px 25px 0px"
-        >记住密码(一个月免登陆)</el-checkbox
+        >记住密码</el-checkbox
       >
       <el-form-item style="width: 100%">
         <el-button
@@ -77,10 +77,10 @@
       </el-form-item>
     </el-form>
     <!--  底部  -->
-    <div class="el-login-footer">
+    <!-- <div class="el-login-footer">
       <span></span>
       <router-link to="/blog">返回</router-link>
-    </div>
+    </div> -->
   </div>
 </template>
 
