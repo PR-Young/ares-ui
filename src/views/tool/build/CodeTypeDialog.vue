@@ -51,14 +51,6 @@
 </template>
 
 <script>
-function inheriltClassAndStyle() {
-  const attrs = this.$attrs;
-  attrs.class && this.$el.classList.add(attrs.class);
-  attrs.style &&
-    Object.entries(attrs.style).forEach(([k, v]) => {
-      this.$el.style[k] = v;
-    });
-}
 export default {
   inheritAttrs: false,
   props: ["showFileName"],
@@ -106,19 +98,19 @@ export default {
     },
     onClose() {},
     close(e) {
-      $emit(this, "update:visible", false);
+      this.$emit("update:visible", false);
     },
     handelConfirm() {
       this.$refs.elForm.validate((valid) => {
         if (!valid) return;
-        $emit(this, "confirm", { ...this.formData });
+        this.$emit("confirm", { ...this.formData });
         this.close();
       });
     },
   },
   mounted() {
-    inheriltClassAndStyle.call(this);
+
   },
-  emits: ["update:visible", "confirm"],
+  // emits: ["update:visible", "confirm"],
 };
 </script>

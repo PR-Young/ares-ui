@@ -510,8 +510,9 @@ export default {
       this.handleQuery();
     },
     // 多选框选中数据
-    handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.id);
+    handleSelectionChange(selection) {debugger
+      this.ids = ""
+      this.ids += selection.map((item) => item.deploymentId) + ",";
       this.single = selection.length !== 1;
       this.multiple = !selection.length;
     },
@@ -642,7 +643,7 @@ export default {
     handleDelete(row) {
       //const ids = row.deploymentId || this.ids;
       const params = {
-        deployId: row.id || this.ids,
+        deployId: row.deploymentId || this.ids,
       };
       this.$confirm(
         '是否确认删除流程定义编号为"' + params.deployId + '"的数据项?',

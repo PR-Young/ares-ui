@@ -112,19 +112,19 @@
     />
 
     <form-drawer
-      :visible="drawerVisible"
+      :visible.sync="drawerVisible"
       :form-data="formData"
       size="100%"
       :generate-conf="generateConf"
     />
     <json-drawer
       size="60%"
-      :visible="jsonDrawerVisible"
+      :visible.sync="jsonDrawerVisible"
       :json-str="JSON.stringify(formData)"
       @refresh="refreshJson"
     />
     <code-type-dialog
-      :visible="dialogVisible"
+      :visible.sync="dialogVisible"
       title="选择生成类型"
       :show-file-name="showFileName"
       @confirm="generate"
@@ -133,7 +133,7 @@
     <!--表单配置详情-->
     <el-dialog
       :title="formTitle"
-      v-model="formOpen"
+      :visible="formOpen"
       width="500px"
       append-to-body
     >
@@ -556,7 +556,7 @@ export default {
       this.formConf = data;
     },
     /** 表单基本信息 */
-    handleForm() {
+    handleForm() {debugger
       this.formData = {
         fields: deepClone(this.drawingList),
         ...this.formConf,
