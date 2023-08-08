@@ -335,7 +335,7 @@ export default {
     getTreeselect() {
       listMenu().then((response) => {
         this.menuOptions = [];
-        const menu = { id: "0", name: "主类目", children: [] };
+        const menu = { id: 0, name: "主类目", children: [] };
         menu.children = this.handleTree(response.data, "id");
         this.menuOptions.push(menu);
       });
@@ -360,7 +360,7 @@ export default {
     reset() {
       this.form = {
         id: undefined,
-        pId: "0",
+        pId: 0,
         name: undefined,
         icon: undefined,
         type: 1,

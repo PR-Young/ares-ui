@@ -1,5 +1,5 @@
-import {constantRoutes} from '@/router'
-import {getRouters} from '@/api/menu'
+import { constantRoutes } from '@/router'
+import { getRouters } from '@/api/menu'
 import Layout from '@/layout/index'
 
 const permission = {
@@ -15,12 +15,12 @@ const permission = {
     },
     actions: {
         // 生成路由
-        GenerateRoutes({commit}) {
+        GenerateRoutes({ commit }) {
             return new Promise(resolve => {
                 // 向后端请求路由数据
                 getRouters().then(res => {
                     const accessedRoutes = filterAsyncRouter(res.data)
-                    accessedRoutes.push({path: '*', redirect: '/404', hidden: true})
+                    accessedRoutes.push({ path: '*', redirect: '/404', hidden: true })
                     commit('SET_ROUTES', accessedRoutes)
                     resolve(accessedRoutes)
                 })
@@ -33,6 +33,7 @@ const permission = {
 function filterAsyncRouter(asyncRouterMap) {
     return asyncRouterMap.filter(route => {
         if (route.component) {
+            route.path = "/" + route.path
             // Layout组件特殊处理
             if (route.component === 'Layout') {
                 route.component = Layout

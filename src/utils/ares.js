@@ -127,7 +127,7 @@ export function handleTree(data, id, parentId, children, rootId) {
   id = id || 'id'
   parentId = parentId || 'pid'
   children = children || 'children'
-  rootId = rootId || '0'
+  rootId = rootId || 0
   //对源数据深度克隆
   const cloneData = JSON.parse(JSON.stringify(data))
   let treeData = ''
