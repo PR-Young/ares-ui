@@ -1,6 +1,7 @@
 'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
+const webpack = require('webpack')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -53,8 +54,12 @@ module.exports = {
     },
     optimization: {
       runtimeChunk: true
-    }
-
+    },
+    plugins:[
+      new webpack.ProvidePlugin({
+        process: 'process/browser'
+      })
+    ],
   },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test
