@@ -34,23 +34,23 @@ export const constantRoutes = [
         children: [
             {
                 path: '/redirect/:path(.*)',
-                component: (resolve) => require(['@/views/redirect'], resolve)
+                component: () => import('@/views/redirect')
             }
         ]
     },
     {
         path: '/login',
-        component: (resolve) => require(['@/views/login'], resolve),
+        component: () => import('@/views/login'),
         hidden: true
     },
     {
         path: '/404',
-        component: (resolve) => require(['@/views/error/404'], resolve),
+        component: () => import('@/views/error/404'),
         hidden: true
     },
     {
         path: '/401',
-        component: (resolve) => require(['@/views/error/401'], resolve),
+        component: () => import('@/views/error/401'),
         hidden: true
     },
     {
@@ -61,26 +61,26 @@ export const constantRoutes = [
         children: [
             {
                 path: '/blog',
-                component: (resolve) => require(['@/layout-blog/components/Index'], resolve),
+                component: () => import('@/layout-blog/components/Index'),
                 name: '主页',
             },
             {
                 path: '/details/:contentId',
-                component: (resolve) => require(['@/layout-blog/components/Details'], resolve),
+                component: () => import('@/layout-blog/components/Details'),
                 name: 'details'
             },
             {
                 path: '/archives',
-                component: (resolve) => require(['@/layout-blog/components/Archives'], resolve),
+                component: () => import('@/layout-blog/components/Archives'),
                 name: 'archives'
             },
             {
                 path: '/tag',
-                component: (resolve) => require(['@/layout-blog/components/Tag'], resolve),
+                component: () => import('@/layout-blog/components/Tag'),
                 name: 'tag'
             }, {
                 path: '/updateinfo',
-                component: (resolve) => require(['@/layout-blog/components/UpdateInfo'], resolve),
+                component: () => import('@/layout-blog/components/UpdateInfo'),
                 name: 'updateinfo'
             },]
     },
@@ -91,7 +91,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'index',
-                component: (resolve) => require(['@/views/index'], resolve),
+                component: () => import('@/views/index'),
                 name: '首页',
                 meta: { title: '首页', icon: 'dashboard', noCache: true, affix: true }
             }
@@ -105,7 +105,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'profile',
-                component: (resolve) => require(['@/views/system/user/profile/index'], resolve),
+                component: () => import('@/views/system/user/profile/index'),
                 name: 'Profile',
                 meta: { title: '个人中心', icon: 'user' }
             }
@@ -118,7 +118,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'type/data/:dictId',
-                component: (resolve) => require(['@/views/system/dict/data'], resolve),
+                component: () => import('@/views/system/dict/data'),
                 name: 'Data',
                 meta: { title: '字典数据', icon: '' }
             }
@@ -131,7 +131,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'log',
-                component: (resolve) => require(['@/views/monitor/job/log'], resolve),
+                component: () => import('@/views/monitor/job/log'),
                 name: 'JobLog',
                 meta: { title: '调度日志' }
             }
@@ -144,7 +144,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'bindings/:vhost/:queueName',
-                component: (resolve) => require(['@/views/monitor/mq/bindings'], resolve),
+                component: () => import('@/views/monitor/mq/bindings'),
                 name: 'Bindings',
                 meta: { title: '绑定关系' }
             }
@@ -157,7 +157,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'edit',
-                component: (resolve) => require(['@/views/tool/gen/editTable'], resolve),
+                component: () => import('@/views/tool/gen/editTable'),
                 name: 'GenEdit',
                 meta: { title: '修改生成配置' }
             }
@@ -171,7 +171,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'message',
-                component: (resolve) => require(['@/views/notify/index'], resolve),
+                component: () => import('@/views/notify/index'),
                 name: 'Message',
                 meta: { title: '消息中心', icon: 'message' }
             }
@@ -184,7 +184,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'result',
-                component: (resolve) => require(['@/views/query'], resolve),
+                component: () => import('@/views/query'),
                 name: 'Search',
                 meta: { title: '全文检索', icon: '' }
             }
@@ -197,7 +197,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'definition/model/',
-                component: (resolve) => require(['@/views/flowable/definition/model'], resolve),
+                component: () => import('@/views/flowable/definition/model'),
                 name: 'Model',
                 meta: { title: '流程设计', icon: '' }
             }
@@ -210,7 +210,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'task/record/index',
-                component: (resolve) => require(['@/views/flowable/task/record/index'], resolve),
+                component: () => import('@/views/flowable/task/record/index'),
                 name: 'Record',
                 meta: { title: '流程处理', icon: '' }
             }
@@ -223,7 +223,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'build/index',
-                component: (resolve) => require(['@/views/tool/build/index'], resolve),
+                component: () => import('@/views/tool/build/index'),
                 name: 'FormBuild',
                 meta: { title: '表单配置', icon: '' }
             }
