@@ -2,6 +2,7 @@
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 const webpack = require('webpack')
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -55,10 +56,8 @@ module.exports = {
     optimization: {
       runtimeChunk: true
     },
-    plugins:[
-      new webpack.ProvidePlugin({
-        process: 'process/browser'
-      })
+    plugins: [
+      new NodePolyfillPlugin()
     ],
   },
   chainWebpack(config) {
