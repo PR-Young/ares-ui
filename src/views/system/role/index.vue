@@ -105,7 +105,7 @@
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
     >
-      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column type="selection" width="55" align="center" :selectable="selectable" />
       <el-table-column
         label="角色名称"
         prop="roleName"
@@ -140,6 +140,7 @@
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['role:delete']"
+            :disabled="scope.row.id == '1'"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -419,6 +420,12 @@ export default {
           row.status = row.status === "0" ? "1" : "0";
         });
     },
+    selectable(row, index){
+                if(row.id === '1'){
+                    return false;
+                }
+                return true;
+            },
     // 取消按钮
     cancel() {
       this.open = false;

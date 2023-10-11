@@ -17,7 +17,7 @@ import './assets/icons' // icon
 import './permission' // permission control
 import { getDicts } from "@/api/system/dict/data";
 import { getConfigKey } from "@/api/system/config";
-import { addDateRange, download, handleTree, parseTime, resetForm, selectDictLabel } from "@/utils/ares";
+import { addDateRange, download, handleTree, parseTime, resetForm, selectDictLabel, parseString } from "@/utils/ares";
 import Pagination from "@/components/Pagination";
 import VueParticles from "vue-particles";
 // markdown 注册
@@ -34,6 +34,7 @@ Vue.prototype.addDateRange = addDateRange
 Vue.prototype.selectDictLabel = selectDictLabel
 Vue.prototype.download = download
 Vue.prototype.handleTree = handleTree
+Vue.prototype.parseString = parseString
 
 Vue.prototype.msgSuccess = function (msg) {
   this.$message({ showClose: true, message: msg, type: "success" });

@@ -124,7 +124,6 @@ export function praseStrEmpty(str) {
  * @param {*} rootId 根Id 默认 0
  */
 export function handleTree(data, id, parentId, children, rootId) {
-  debugger
   id = id || 'id'
   parentId = parentId || 'pId'
   children = children || 'children'
@@ -145,4 +144,16 @@ export function handleTree(data, id, parentId, children, rootId) {
     });
   }
   return treeData != '' ? treeData : data;
+}
+
+
+export function parseString(datas) {
+  if (!datas || datas.length == 0) {
+    return datas;
+  }
+  var newData = []
+  datas.forEach(data => {
+    newData.push(data.toString())
+  });
+  return newData;
 }

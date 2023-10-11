@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import { praseStrEmpty } from "@/utils/ares";
 
 // 查询列表
 export function listSysTenants(query) {
@@ -12,7 +13,7 @@ export function listSysTenants(query) {
 // 查询
 export function getSysTenants(id) {
     return request({
-        url: '/ares/sysTenants/' + id,
+        url: '/ares/sysTenants/' + praseStrEmpty(id),
         method: 'get'
     })
 }

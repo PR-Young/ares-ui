@@ -133,7 +133,7 @@
           @selection-change="handleSelectionChange"
           @sort-change="sortChange"
         >
-          <el-table-column type="selection" width="40" align="center" />
+          <el-table-column type="selection" width="40" align="center" :selectable="selectable" />
           <el-table-column
             label="用户名称"
             align="center"
@@ -180,6 +180,7 @@
                 :active-value="1"
                 :inactive-value="0"
                 @change="handleStatusChange(scope.row)"
+                :disabled="scope.row.id == '1'"
               ></el-switch>
             </template>
           </el-table-column>
@@ -206,6 +207,7 @@
                 icon="el-icon-delete"
                 @click="handleDelete(scope.row)"
                 v-hasPermi="['user:delete']"
+                :disabled="scope.row.id == '1'"
                 >删除</el-button
               >
               <el-button
@@ -601,6 +603,12 @@ export default {
       this.queryParams.deptId = data.id;
       this.getList();
     },
+    selectable(row, index){
+                if(row.id === '1'){
+                    return false;
+                }
+                return true;
+            },
     // 取消按钮
     cancel() {
       this.open = false;

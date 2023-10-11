@@ -89,7 +89,7 @@
                 :data="sysTenantsList"
                 @selection-change="handleSelectionChange"
         >
-            <el-table-column type="selection" width="55" align="center"/>
+            <el-table-column type="selection" width="55" align="center" :selectable="selectable" />
             <el-table-column label="租户名" align="center" prop="tenantName"/>
             <el-table-column label="租户别称" align="center" prop="tenantAlias"/>
             <el-table-column label="状态" align="center" >
@@ -99,6 +99,7 @@
                       :active-value="'0'"
                       :inactive-value="'1'"
                       @change="handleStatusChange(scope.row)"
+                      :disabled="scope.row.id == '1'"
                     ></el-switch>
                   </template>
             </el-table-column>
@@ -132,6 +133,7 @@
                             icon="el-icon-delete"
                             @click="handleDelete(scope.row)"
                             v-hasPermi="['sysTenants:delete']"
+                            :disabled="scope.row.id == '1'"
                     >删除
                     </el-button>
                 </template>
@@ -164,7 +166,16 @@
                               >{{dict.dictLabel}}</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                      
+                    <el-form-item label="角色">
+                        <el-select v-model="form.roleIds" multiple placeholder="请选择">
+                        <el-option
+                              v-for="item in roleOptions"
+                              :key="item.id"
+                              :label="item.roleName"
+                              :value="item.id"
+                        ></el-option>
+                        </el-select>
+                    </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -199,6 +210,8 @@
                 total: 0,
                 // 岗位表格数据
                 sysTenantsList: [],
+                // 角色选项
+                roleOptions: [],
                 // 弹出层标题
                 title: "",
                 // 是否显示弹出层
@@ -234,6 +247,12 @@
                     this.loading = false;
                 });
             },
+            selectable(row, index){
+                if(row.id === '1'){
+                    return false;
+                }
+                return true;
+            },
             // 取消按钮
             cancel() {
                 this.open = false;
@@ -268,8 +287,12 @@
             /** 新增按钮操作 */
             handleAdd() {
                 this.reset();
-                this.open = true;
-                this.title = "添加租户";
+                getSysTenants().then((response) => {
+                    this.roleOptions = response.roles;
+                    this.open = true;
+                    this.title = "添加租户";
+                });
+                
             },
             /** 修改按钮操作 */
             handleUpdate(row) {
@@ -277,6 +300,8 @@
                 const id = row.id || this.ids;
                 getSysTenants(id).then((response) => {
                     this.form = response.data;
+                    this.form.roleIds =  response.roleIds;
+                    this.roleOptions = response.roles;
                     this.open = true;
                     this.title = "修改租户";
                 });
