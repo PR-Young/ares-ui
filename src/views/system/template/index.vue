@@ -1,8 +1,11 @@
-
-
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      label-width="68px"
+    >
       <el-form-item label="模版名称" prop="subject">
         <el-input
           v-model="queryParams.subject"
@@ -26,8 +29,16 @@
         ></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >搜索</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >重置</el-button
+        >
       </el-form-item>
     </el-form>
 
@@ -39,7 +50,8 @@
           size="mini"
           @click="handleAdd"
           v-hasPermi="['sysTemplate:edit']"
-        >新增</el-button>
+          >新增</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -49,7 +61,8 @@
           :disabled="single"
           @click="handleUpdate"
           v-hasPermi="['sysTemplate:edit']"
-        >修改</el-button>
+          >修改</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -59,7 +72,8 @@
           :disabled="multiple"
           @click="handleDelete"
           v-hasPermi="['sysTemplate:delete']"
-        >删除</el-button>
+          >删除</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -68,7 +82,8 @@
           size="mini"
           @click="handleExport"
           v-hasPermi="['sysTemplate:export']"
-        >导出</el-button>
+          >导出</el-button
+        >
       </el-col>
     </el-row>
 
@@ -80,17 +95,50 @@
       @sort-change="sortChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="模版名称" align="center" prop="name" fixed width="200" />
-      <el-table-column label="模版标题" align="center" prop="subject" :show-overflow-tooltip="true" />
-      <el-table-column label="模版内容" align="center" prop="text" :show-overflow-tooltip="true" />
-      <el-table-column label="模版html" align="center" prop="html" width="300" :show-overflow-tooltip="true" />
+      <el-table-column
+        label="模版名称"
+        align="center"
+        prop="name"
+        fixed
+        width="200"
+      />
+      <el-table-column
+        label="模版标题"
+        align="center"
+        prop="subject"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column
+        label="模版内容"
+        align="center"
+        prop="text"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column
+        label="模版html"
+        align="center"
+        prop="html"
+        width="300"
+        :show-overflow-tooltip="true"
+      />
       <el-table-column label="模版参数" align="center" prop="param" />
-      <el-table-column label="创建时间" align="center" prop="createTime" sortable="custom" width="180">
+      <el-table-column
+        label="创建时间"
+        align="center"
+        prop="createTime"
+        sortable="custom"
+        width="180"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right">
+      <el-table-column
+        label="操作"
+        align="center"
+        class-name="small-padding fixed-width"
+        fixed="right"
+      >
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -98,20 +146,22 @@
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['sysTemplate:edit']"
-          >修改</el-button>
+            >修改</el-button
+          >
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['sysTemplate:delete']"
-          >删除</el-button>
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
 
     <pagination
-      v-show="total>0"
+      v-show="total > 0"
       :total="total"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
@@ -128,13 +178,25 @@
           <el-input v-model="form.subject" placeholder="请输入模版标题" />
         </el-form-item>
         <el-form-item label="模版内容" prop="text">
-          <el-input v-model="form.text" type="textarea" placeholder="请输入模版内容" />
+          <el-input
+            v-model="form.text"
+            type="textarea"
+            placeholder="请输入模版内容"
+          />
         </el-form-item>
         <el-form-item label="模版html" prop="html">
-          <el-input v-model="form.html" type="textarea" placeholder="请输入模版内容" />
+          <el-input
+            v-model="form.html"
+            type="textarea"
+            placeholder="请输入模版内容"
+          />
         </el-form-item>
         <el-form-item label="模版参数" prop="param">
-          <el-input v-model="form.param" type="textarea" placeholder="请输入模版参数" />
+          <el-input
+            v-model="form.param"
+            type="textarea"
+            placeholder="请输入模版参数"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

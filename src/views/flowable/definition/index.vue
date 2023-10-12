@@ -510,8 +510,9 @@ export default {
       this.handleQuery();
     },
     // 多选框选中数据
-    handleSelectionChange(selection) {debugger
-      this.ids = ""
+    handleSelectionChange(selection) {
+      debugger;
+      this.ids = "";
       this.ids += selection.map((item) => item.deploymentId) + ",";
       this.single = selection.length !== 1;
       this.multiple = !selection.length;

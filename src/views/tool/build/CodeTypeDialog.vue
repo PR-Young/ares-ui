@@ -108,9 +108,7 @@ export default {
       });
     },
   },
-  mounted() {
-
-  },
+  mounted() {},
   // emits: ["update:visible", "confirm"],
 };
 </script>

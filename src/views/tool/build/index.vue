@@ -556,7 +556,8 @@ export default {
       this.formConf = data;
     },
     /** 表单基本信息 */
-    handleForm() {debugger
+    handleForm() {
+      debugger;
       this.formData = {
         fields: deepClone(this.drawingList),
         ...this.formConf,

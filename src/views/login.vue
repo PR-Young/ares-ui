@@ -116,7 +116,7 @@ export default {
       loading: false,
       redirect: undefined,
       focus1: false,
-      focus2: false
+      focus2: false,
     };
   },
   watch: {
@@ -129,10 +129,10 @@ export default {
   },
   mounted() {
     if (this.loginForm.username === "") {
-      this.focus1 = true
+      this.focus1 = true;
       //this.$refs.username.focus();
     } else if (this.loginForm.password === "") {
-      this.focus2 = true
+      this.focus2 = true;
       //this.$refs.password.focus();
     }
   },

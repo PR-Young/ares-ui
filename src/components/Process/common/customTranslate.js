@@ -7,7 +7,7 @@ export default function customTranslate(template, replacements) {
   template = translations[template] || template
 
   // Replace
-  return template.replace(/{([^}]+)}/g, function(_, key) {
+  return template.replace(/{([^}]+)}/g, function (_, key) {
     var str = replacements[key]
     if (
       translations[replacements[key]] !== null &&

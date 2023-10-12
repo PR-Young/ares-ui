@@ -133,7 +133,12 @@
           @selection-change="handleSelectionChange"
           @sort-change="sortChange"
         >
-          <el-table-column type="selection" width="40" align="center" :selectable="selectable" />
+          <el-table-column
+            type="selection"
+            width="40"
+            align="center"
+            :selectable="selectable"
+          />
           <el-table-column
             label="用户名称"
             align="center"
@@ -603,12 +608,12 @@ export default {
       this.queryParams.deptId = data.id;
       this.getList();
     },
-    selectable(row, index){
-                if(row.id === '1'){
-                    return false;
-                }
-                return true;
-            },
+    selectable(row, index) {
+      if (row.id === "1") {
+        return false;
+      }
+      return true;
+    },
     // 取消按钮
     cancel() {
       this.open = false;

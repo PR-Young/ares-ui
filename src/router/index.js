@@ -27,212 +27,212 @@ import BlogLayout from '@/layout-blog'
 
 // 公共路由
 export const constantRoutes = [
-    {
-        path: '/redirect',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: '/redirect/:path(.*)',
-                component: (resolve) => require(['@/views/redirect'], resolve)
-            }
-        ]
-    },
-    {
-        path: '/login',
-        component: (resolve) => require(['@/views/login'], resolve),
-        hidden: true
-    },
-    {
-        path: '/404',
-        component: (resolve) => require(['@/views/error/404'], resolve),
-        hidden: true
-    },
-    {
-        path: '/401',
-        component: (resolve) => require(['@/views/error/401'], resolve),
-        hidden: true
-    },
-    {
-        path: '/mypage',
-        component: BlogLayout,
-        redirect: 'blog',
-        hidden: true,
-        children: [
-            {
-                path: '/blog',
-                component: (resolve) => require(['@/layout-blog/components/Index'], resolve),
-                name: '主页',
-            },
-            {
-                path: '/details/:contentId',
-                component: (resolve) => require(['@/layout-blog/components/Details'], resolve),
-                name: 'details'
-            },
-            {
-                path: '/archives',
-                component: (resolve) => require(['@/layout-blog/components/Archives'], resolve),
-                name: 'archives'
-            },
-            {
-                path: '/tag',
-                component: (resolve) => require(['@/layout-blog/components/Tag'], resolve),
-                name: 'tag'
-            }, {
-                path: '/updateinfo',
-                component: (resolve) => require(['@/layout-blog/components/UpdateInfo'], resolve),
-                name: 'updateinfo'
-            },]
-    },
-    {
-        path: '/',
-        component: Layout,
-        redirect: 'index',
-        children: [
-            {
-                path: 'index',
-                component: (resolve) => require(['@/views/index'], resolve),
-                name: '首页',
-                meta: { title: '首页', icon: 'dashboard', noCache: true, affix: true }
-            }
-        ]
-    },
-    {
-        path: '/userfile',
-        component: Layout,
-        hidden: true,
-        redirect: 'noredirect',
-        children: [
-            {
-                path: 'profile',
-                component: (resolve) => require(['@/views/system/user/profile/index'], resolve),
-                name: 'Profile',
-                meta: { title: '个人中心', icon: 'user' }
-            }
-        ]
-    },
-    {
-        path: '/dictdata',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: 'type/data/:dictId',
-                component: (resolve) => require(['@/views/system/dict/data'], resolve),
-                name: 'Data',
-                meta: { title: '字典数据', icon: '' }
-            }
-        ]
-    },
-    {
-        path: '/joblog',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: 'log',
-                component: (resolve) => require(['@/views/monitor/job/log'], resolve),
-                name: 'JobLog',
-                meta: { title: '调度日志' }
-            }
-        ]
-    },
-    {
-        path: '/mq',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: 'bindings/:vhost/:queueName',
-                component: (resolve) => require(['@/views/monitor/mq/bindings'], resolve),
-                name: 'Bindings',
-                meta: { title: '绑定关系' }
-            }
-        ]
-    },
-    {
-        path: '/genedit',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: 'edit',
-                component: (resolve) => require(['@/views/tool/gen/editTable'], resolve),
-                name: 'GenEdit',
-                meta: { title: '修改生成配置' }
-            }
-        ]
-    },
-    {
-        path: '/notify',
-        component: Layout,
-        hidden: true,
-        redirect: 'noredirect',
-        children: [
-            {
-                path: 'message',
-                component: (resolve) => require(['@/views/notify/index'], resolve),
-                name: 'Message',
-                meta: { title: '消息中心', icon: 'message' }
-            }
-        ]
-    },
-    {
-        path: '/query',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: 'result',
-                component: (resolve) => require(['@/views/query'], resolve),
-                name: 'Search',
-                meta: { title: '全文检索', icon: '' }
-            }
-        ]
-    },
-    {
-        path: '/flowable',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: 'definition/model/',
-                component: (resolve) => require(['@/views/flowable/definition/model'], resolve),
-                name: 'Model',
-                meta: { title: '流程设计', icon: '' }
-            }
-        ]
-    },
-    {
-        path: '/flowable',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: 'task/record/index',
-                component: (resolve) => require(['@/views/flowable/task/record/index'], resolve),
-                name: 'Record',
-                meta: { title: '流程处理', icon: '' }
-            }
-        ]
-    },
-    {
-        path: '/tool',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: 'build/index',
-                component: (resolve) => require(['@/views/tool/build/index'], resolve),
-                name: 'FormBuild',
-                meta: { title: '表单配置', icon: '' }
-            }
-        ]
-    },
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: (resolve) => require(['@/views/redirect'], resolve)
+      }
+    ]
+  },
+  {
+    path: '/login',
+    component: (resolve) => require(['@/views/login'], resolve),
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: (resolve) => require(['@/views/error/404'], resolve),
+    hidden: true
+  },
+  {
+    path: '/401',
+    component: (resolve) => require(['@/views/error/401'], resolve),
+    hidden: true
+  },
+  {
+    path: '/mypage',
+    component: BlogLayout,
+    redirect: 'blog',
+    hidden: true,
+    children: [
+      {
+        path: '/blog',
+        component: (resolve) => require(['@/layout-blog/components/Index'], resolve),
+        name: '主页',
+      },
+      {
+        path: '/details/:contentId',
+        component: (resolve) => require(['@/layout-blog/components/Details'], resolve),
+        name: 'details'
+      },
+      {
+        path: '/archives',
+        component: (resolve) => require(['@/layout-blog/components/Archives'], resolve),
+        name: 'archives'
+      },
+      {
+        path: '/tag',
+        component: (resolve) => require(['@/layout-blog/components/Tag'], resolve),
+        name: 'tag'
+      }, {
+        path: '/updateinfo',
+        component: (resolve) => require(['@/layout-blog/components/UpdateInfo'], resolve),
+        name: 'updateinfo'
+      },]
+  },
+  {
+    path: '/',
+    component: Layout,
+    redirect: 'index',
+    children: [
+      {
+        path: 'index',
+        component: (resolve) => require(['@/views/index'], resolve),
+        name: '首页',
+        meta: { title: '首页', icon: 'dashboard', noCache: true, affix: true }
+      }
+    ]
+  },
+  {
+    path: '/userfile',
+    component: Layout,
+    hidden: true,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'profile',
+        component: (resolve) => require(['@/views/system/user/profile/index'], resolve),
+        name: 'Profile',
+        meta: { title: '个人中心', icon: 'user' }
+      }
+    ]
+  },
+  {
+    path: '/dictdata',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'type/data/:dictId',
+        component: (resolve) => require(['@/views/system/dict/data'], resolve),
+        name: 'Data',
+        meta: { title: '字典数据', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/joblog',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'log',
+        component: (resolve) => require(['@/views/monitor/job/log'], resolve),
+        name: 'JobLog',
+        meta: { title: '调度日志' }
+      }
+    ]
+  },
+  {
+    path: '/mq',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'bindings/:vhost/:queueName',
+        component: (resolve) => require(['@/views/monitor/mq/bindings'], resolve),
+        name: 'Bindings',
+        meta: { title: '绑定关系' }
+      }
+    ]
+  },
+  {
+    path: '/genedit',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'edit',
+        component: (resolve) => require(['@/views/tool/gen/editTable'], resolve),
+        name: 'GenEdit',
+        meta: { title: '修改生成配置' }
+      }
+    ]
+  },
+  {
+    path: '/notify',
+    component: Layout,
+    hidden: true,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'message',
+        component: (resolve) => require(['@/views/notify/index'], resolve),
+        name: 'Message',
+        meta: { title: '消息中心', icon: 'message' }
+      }
+    ]
+  },
+  {
+    path: '/query',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'result',
+        component: (resolve) => require(['@/views/query'], resolve),
+        name: 'Search',
+        meta: { title: '全文检索', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/flowable',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'definition/model/',
+        component: (resolve) => require(['@/views/flowable/definition/model'], resolve),
+        name: 'Model',
+        meta: { title: '流程设计', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/flowable',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'task/record/index',
+        component: (resolve) => require(['@/views/flowable/task/record/index'], resolve),
+        name: 'Record',
+        meta: { title: '流程处理', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/tool',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'build/index',
+        component: (resolve) => require(['@/views/tool/build/index'], resolve),
+        name: 'FormBuild',
+        meta: { title: '表单配置', icon: '' }
+      }
+    ]
+  },
 ]
 
 export default new Router({
-    //mode: 'history', // 去掉url中的#
-    scrollBehavior: (resolve) => ({ y: 0 }),
-    routes: constantRoutes
+  //mode: 'history', // 去掉url中的#
+  scrollBehavior: (resolve) => ({ y: 0 }),
+  routes: constantRoutes
 })

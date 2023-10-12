@@ -1,30 +1,39 @@
 <template>
   <div>
-    <header style="padding: 60px 15px 48px 50px;height:200px">
+    <header style="padding: 60px 15px 48px 50px; height: 200px">
       <div class="explain">
         <h1>My Web</h1>
-        <h4 style="padding-top: 20px;">This is for learn</h4>
+        <h4 style="padding-top: 20px">This is for learn</h4>
       </div>
     </header>
     <div class="index-wrapper">
-      <el-row v-for="item of contents" :key="item.id" style="padding-bottom:10px" >
+      <el-row
+        v-for="item of contents"
+        :key="item.id"
+        style="padding-bottom: 10px"
+      >
         <el-col>
-          <el-card class="box-card" shadow="hover" >
+          <el-card class="box-card" shadow="hover">
             <div slot="header" class="clearfix">
               <el-row>
                 <el-col :span="12">
                   <h3>{{ item.title }}</h3>
-                  <h5>{{item.name}}</h5>
-                  <h6 style="color: #727272;">{{ item.createTime }}</h6>
+                  <h5>{{ item.name }}</h5>
+                  <h6 style="color: #727272">{{ item.createTime }}</h6>
                 </el-col>
                 <el-col :span="12">
-              <!-- <span>{{ item.title }} {{item.name}} {{ item.createTime }}</span> -->
-                  <el-button style="float: right; padding: 3px -1px" type="text" @click="$parent.location('/details/' + item.id)">阅读原文</el-button>
+                  <!-- <span>{{ item.title }} {{item.name}} {{ item.createTime }}</span> -->
+                  <el-button
+                    style="float: right; padding: 3px -1px"
+                    type="text"
+                    @click="$parent.location('/details/' + item.id)"
+                    >阅读原文</el-button
+                  >
                 </el-col>
               </el-row>
             </div>
-            <div class="text item" style="height:260px">
-              <p class="blog-content-1" v-html=item.content  ></p>
+            <div class="text item" style="height: 260px">
+              <p class="blog-content-1" v-html="item.content"></p>
             </div>
           </el-card>
         </el-col>
@@ -40,13 +49,13 @@
               class="blog-more"
               @click="$parent.location('/details/' + item.id)"
               >阅读原文</span
-            > 
+            >
           </div>
           <div class="blog-tag">
             <ul>
               <li v-text="typeFormat(item.type)" ></li>
             </ul>
-          </div> 
+          </div>
         </li>
       </ul> -->
     </div>

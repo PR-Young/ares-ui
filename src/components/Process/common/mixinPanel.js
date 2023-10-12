@@ -35,13 +35,13 @@ export default {
     }
   },
   watch: {
-    'formData.id': function(val) {
+    'formData.id': function (val) {
       this.updateProperties({ id: val })
     },
-    'formData.name': function(val) {
+    'formData.name': function (val) {
       this.updateProperties({ name: val })
     },
-    'formData.documentation': function(val) {
+    'formData.documentation': function (val) {
       if (!val) {
         this.updateProperties({ documentation: [] })
         return

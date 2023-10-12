@@ -6,7 +6,13 @@
       <el-tab-pane label="交换器">
         <el-row class="mb8">
           <el-col :span="1.5">
-            <el-button type="primary" icon="el-icon-plus" size="mini" @click="addExchange">新增</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-plus"
+              size="mini"
+              @click="addExchange"
+              >新增</el-button
+            >
           </el-col>
         </el-row>
         <el-table v-loading="loading" border :data="exchangeList">
@@ -19,7 +25,12 @@
             prop="message_stats"
             :formatter="stringFormat"
           />
-          <el-table-column label="durable" align="center" prop="durable" :formatter="stringFormat" />
+          <el-table-column
+            label="durable"
+            align="center"
+            prop="durable"
+            :formatter="stringFormat"
+          />
           <el-table-column
             label="internal"
             align="center"
@@ -44,7 +55,8 @@
                 type="text"
                 icon="el-icon-delete"
                 @click="handleExchangeDelete(scope.row)"
-              >删除</el-button>
+                >删除</el-button
+              >
             </template>
           </el-table-column>
         </el-table>
@@ -52,7 +64,13 @@
       <el-tab-pane label="队列">
         <el-row class="mb8">
           <el-col :span="1.5">
-            <el-button type="primary" icon="el-icon-plus" size="mini" @click="addQueue">新增</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-plus"
+              size="mini"
+              @click="addQueue"
+              >新增</el-button
+            >
           </el-col>
         </el-row>
         <el-table v-loading="loading" border :data="queueList">
@@ -61,8 +79,18 @@
           <el-table-column label="vhost" align="center" prop="vhost" />
           <el-table-column label="consumers" align="center" prop="consumers" />
           <el-table-column label="messages" align="center" prop="messages" />
-          <el-table-column label="durable" align="center" prop="durable" :formatter="stringFormat" />
-          <el-table-column label="state" align="center" prop="state" :formatter="stringFormat" />
+          <el-table-column
+            label="durable"
+            align="center"
+            prop="durable"
+            :formatter="stringFormat"
+          />
+          <el-table-column
+            label="state"
+            align="center"
+            prop="state"
+            :formatter="stringFormat"
+          />
           <el-table-column
             label="auto_delete"
             align="center"
@@ -81,19 +109,22 @@
                 type="text"
                 icon="el-icon-view"
                 @click="handleDetail(scope.row)"
-              >详情</el-button>
+                >详情</el-button
+              >
               <el-button
                 size="mini"
                 type="text"
                 icon="el-icon-delete"
                 @click="handleQueueDelete(scope.row)"
-              >删除</el-button>
+                >删除</el-button
+              >
               <el-button
                 size="mini"
                 type="text"
                 icon="el-icon-key"
                 @click="purgeQueue(scope.row)"
-              >清空队列</el-button>
+                >清空队列</el-button
+              >
             </template>
           </el-table-column>
         </el-table>
@@ -105,7 +136,12 @@
         <el-row>
           <el-col :span="12" v-if="showExchangeType">
             <el-form-item label="交换器类别" prop="exchangeType">
-              <el-select v-model="form.exchangeType" clearable size="medium" style="width: 250px">
+              <el-select
+                v-model="form.exchangeType"
+                clearable
+                size="medium"
+                style="width: 250px"
+              >
                 <el-option key="DIRECT" label="DIRECT" value="DIRECT" />
                 <el-option key="TOPIC" label="TOPIC" value="TOPIC" />
                 <el-option key="HEADERS" label="HEADERS" value="HEADERS" />

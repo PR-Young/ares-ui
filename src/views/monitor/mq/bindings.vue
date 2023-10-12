@@ -4,24 +4,44 @@
   <div class="app-container">
     <el-row class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" icon="el-icon-plus" size="mini" @click="addBinding">新增</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="mini"
+          @click="addBinding"
+          >新增</el-button
+        >
       </el-col>
     </el-row>
     <el-table v-loading="loading" border :data="bindlingList">
       <el-table-column label="source" align="center" prop="source" />
       <el-table-column label="destination" align="center" prop="destination" />
-      <el-table-column label="destination_type" align="center" prop="destination_type" />
-      <el-table-column label="properties_key" align="center" prop="properties_key" />
+      <el-table-column
+        label="destination_type"
+        align="center"
+        prop="destination_type"
+      />
+      <el-table-column
+        label="properties_key"
+        align="center"
+        prop="properties_key"
+      />
       <el-table-column label="routing_key" align="center" prop="routing_key" />
       <el-table-column label="vhost" align="center" prop="vhost" />
-      <el-table-column label="操作" align="center" width="180" class-name="small-padding fixed-width">
+      <el-table-column
+        label="操作"
+        align="center"
+        width="180"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="romoveBinding(scope.row)"
-          >删除</el-button>
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -31,7 +51,12 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="交换器类别" prop="exchangeType">
-              <el-select v-model="form.exchangeType" clearable size="medium" style="width: 250px">
+              <el-select
+                v-model="form.exchangeType"
+                clearable
+                size="medium"
+                style="width: 250px"
+              >
                 <el-option key="DIRECT" label="DIRECT" value="DIRECT" />
                 <el-option key="TOPIC" label="TOPIC" value="TOPIC" />
                 <el-option key="HEADERS" label="HEADERS" value="HEADERS" />
@@ -41,7 +66,12 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="交换器名称" prop="exchangeName">
-              <el-select v-model="form.exchangeName" clearable size="medium" style="width: 250px">
+              <el-select
+                v-model="form.exchangeName"
+                clearable
+                size="medium"
+                style="width: 250px"
+              >
                 <el-option
                   v-for="exchange in exchangeData"
                   :key="exchange.name"
@@ -53,7 +83,11 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="队列名称" prop="queueName">
-              <el-input v-model="form.queueName" readonly style="width: 250px" />
+              <el-input
+                v-model="form.queueName"
+                readonly
+                style="width: 250px"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">

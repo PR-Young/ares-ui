@@ -84,7 +84,12 @@
         :formatter="visibleFormat"
       ></el-table-column>
       <el-table-column prop="order" label="排序" width="60"></el-table-column>
-      <el-table-column label="创建时间" align="center" prop="createTime" width="200">
+      <el-table-column
+        label="创建时间"
+        align="center"
+        prop="createTime"
+        width="200"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>

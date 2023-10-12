@@ -2,7 +2,12 @@
 
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      label-width="68px"
+    >
       <el-form-item label="任务名称" prop="jobName">
         <el-input
           v-model="queryParams.jobName"
@@ -13,7 +18,12 @@
         />
       </el-form-item>
       <el-form-item label="任务组名" prop="jobGroup">
-        <el-select v-model="queryParams.jobGroup" placeholder="请选择任务组名" clearable size="small">
+        <el-select
+          v-model="queryParams.jobGroup"
+          placeholder="请选择任务组名"
+          clearable
+          size="small"
+        >
           <el-option
             v-for="dict in jobGroupOptions"
             :key="dict.dictValue"
@@ -23,7 +33,12 @@
         </el-select>
       </el-form-item>
       <el-form-item label="任务状态" prop="status">
-        <el-select v-model="queryParams.status" placeholder="请选择任务状态" clearable size="small">
+        <el-select
+          v-model="queryParams.status"
+          placeholder="请选择任务状态"
+          clearable
+          size="small"
+        >
           <el-option
             v-for="dict in statusOptions"
             :key="dict.dictValue"
@@ -33,8 +48,16 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >搜索</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >重置</el-button
+        >
       </el-form-item>
     </el-form>
 
@@ -46,7 +69,8 @@
           size="mini"
           @click="handleAdd"
           v-hasPermi="['quartz:edit']"
-        >新增</el-button>
+          >新增</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -56,7 +80,8 @@
           :disabled="single"
           @click="handleUpdate"
           v-hasPermi="['quartz:edit']"
-        >修改</el-button>
+          >修改</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -66,7 +91,8 @@
           :disabled="multiple"
           @click="handleDelete"
           v-hasPermi="['quartz:delete']"
-        >删除</el-button>
+          >删除</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -75,7 +101,8 @@
           size="mini"
           @click="handleExport"
           v-hasPermi="['quartz:export']"
-        >导出</el-button>
+          >导出</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -84,14 +111,30 @@
           size="mini"
           @click="handleJobLog"
           v-hasPermi="['quartz:logList']"
-        >日志</el-button>
+          >日志</el-button
+        >
       </el-col>
     </el-row>
 
-    <el-table v-loading="loading" :data="jobList" border @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="jobList"
+      border
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="任务名称" align="center" prop="jobName" :show-overflow-tooltip="true" />
-      <el-table-column label="任务组名" align="center" prop="jobGroup" :formatter="jobGroupFormat" />
+      <el-table-column
+        label="任务名称"
+        align="center"
+        prop="jobName"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column
+        label="任务组名"
+        align="center"
+        prop="jobGroup"
+        :formatter="jobGroupFormat"
+      />
       <el-table-column
         label="调用目标字符串"
         align="center"
@@ -114,7 +157,11 @@
           ></el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column
+        label="操作"
+        align="center"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -122,20 +169,28 @@
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['quartz:edit']"
-          >修改</el-button>
+            >修改</el-button
+          >
           <el-button
             size="mini"
             type="text"
             icon="el-icon-caret-right"
             @click="handleRun(scope.row)"
-          >执行一次</el-button>
-          <el-button size="mini" type="text" icon="el-icon-view" @click="handleView(scope.row)">详细</el-button>
+            >执行一次</el-button
+          >
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-view"
+            @click="handleView(scope.row)"
+            >详细</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
 
     <pagination
-      v-show="total>0"
+      v-show="total > 0"
       :total="total"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
@@ -180,12 +235,18 @@
                   <i class="el-icon-question"></i>
                 </el-tooltip>
               </span>
-              <el-input v-model="form.invokeTarget" placeholder="请输入调用目标字符串" />
+              <el-input
+                v-model="form.invokeTarget"
+                placeholder="请输入调用目标字符串"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="cron表达式" prop="cronExpression">
-              <el-input v-model="form.cronExpression" placeholder="请输入cron执行表达式" />
+              <el-input
+                v-model="form.cronExpression"
+                placeholder="请输入cron执行表达式"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -212,7 +273,8 @@
                   v-for="dict in statusOptions"
                   :key="dict.dictValue"
                   :label="dict.dictValue"
-                >{{dict.dictLabel}}</el-radio>
+                  >{{ dict.dictLabel }}</el-radio
+                >
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -225,7 +287,12 @@
     </el-dialog>
 
     <!-- 任务日志详细 -->
-    <el-dialog title="任务详细" :visible.sync="openView" width="700px" append-to-body>
+    <el-dialog
+      title="任务详细"
+      :visible.sync="openView"
+      width="700px"
+      append-to-body
+    >
       <el-form ref="form" :model="form" label-width="120px" size="mini">
         <el-row>
           <el-col :span="12">
@@ -233,14 +300,22 @@
             <el-form-item label="任务名称：">{{ form.jobName }}</el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="任务分组：">{{ jobGroupFormat(form) }}</el-form-item>
-            <el-form-item label="创建时间：">{{ form.createTime }}</el-form-item>
+            <el-form-item label="任务分组：">{{
+              jobGroupFormat(form)
+            }}</el-form-item>
+            <el-form-item label="创建时间：">{{
+              form.createTime
+            }}</el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="任务描述：">{{ form.description }}</el-form-item>
+            <el-form-item label="任务描述：">{{
+              form.description
+            }}</el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="调用目标方法：">{{ form.invokeTarget }}</el-form-item>
+            <el-form-item label="调用目标方法：">{{
+              form.invokeTarget
+            }}</el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="是否并发：">

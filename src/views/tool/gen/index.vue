@@ -2,7 +2,12 @@
 
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      label-width="68px"
+    >
       <el-form-item label="表名称" prop="tableName">
         <el-input
           v-model="queryParams.tableName"
@@ -34,8 +39,16 @@
         ></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >搜索</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >重置</el-button
+        >
       </el-form-item>
     </el-form>
 
@@ -66,17 +79,32 @@
         :show-overflow-tooltip="true"
         width="400"
       />
-      <el-table-column label="创建时间" align="center" prop="CREATE_TIME" width="200">
+      <el-table-column
+        label="创建时间"
+        align="center"
+        prop="CREATE_TIME"
+        width="200"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.CREATE_TIME) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新时间" align="center" prop="UPDATE_TIME" width="200">
+      <el-table-column
+        label="更新时间"
+        align="center"
+        prop="UPDATE_TIME"
+        width="200"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.UPDATE_TIME) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right">
+      <el-table-column
+        label="操作"
+        align="center"
+        class-name="small-padding fixed-width"
+        fixed="right"
+      >
         <template slot-scope="scope">
           <el-button
             type="text"
@@ -84,18 +112,20 @@
             icon="el-icon-view"
             @click="handlePreview(scope.row)"
             v-hasPermi="['tool:gen:preview']"
-          >预览</el-button>
+            >预览</el-button
+          >
           <el-button
             type="text"
             size="small"
             icon="el-icon-download"
             @click="handleGenTable(scope.row)"
-          >生成代码</el-button>
+            >生成代码</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
     <pagination
-      v-show="total>0"
+      v-show="total > 0"
       :total="total"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
@@ -112,8 +142,8 @@
       <el-tabs v-model="preview.activeName">
         <el-tab-pane
           v-for="(value, key) in preview.data"
-          :label="key.substring(key.lastIndexOf('/')+1,key.indexOf('.vm'))"
-          :name="key.substring(key.lastIndexOf('/')+1,key.indexOf('.vm'))"
+          :label="key.substring(key.lastIndexOf('/') + 1, key.indexOf('.vm'))"
+          :name="key.substring(key.lastIndexOf('/') + 1, key.indexOf('.vm'))"
           :key="key"
         >
           <pre>{{ value }}</pre>

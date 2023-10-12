@@ -8,7 +8,7 @@
           <span slot="label">生成模板</span>
           <el-select v-model="info.tplCategory">
             <el-option label="单表（增删改查）" value="crud" />
-            <el-option label="树表（增删改查）" value="tree"/>
+            <el-option label="树表（增删改查）" value="tree" />
           </el-select>
         </el-form-item>
       </el-col>
@@ -17,7 +17,10 @@
         <el-form-item prop="packageName">
           <span slot="label">
             生成包路径
-            <el-tooltip content="生成在哪个java包下，例如 com.system" placement="top">
+            <el-tooltip
+              content="生成在哪个java包下，例如 com.system"
+              placement="top"
+            >
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -68,7 +71,10 @@
         <el-form-item>
           <span slot="label">
             树编码字段
-            <el-tooltip content="树显示的编码字段名， 如：dept_id" placement="top">
+            <el-tooltip
+              content="树显示的编码字段名， 如：dept_id"
+              placement="top"
+            >
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -86,7 +92,10 @@
         <el-form-item>
           <span slot="label">
             树父编码字段
-            <el-tooltip content="树显示的父编码字段名， 如：parent_Id" placement="top">
+            <el-tooltip
+              content="树显示的父编码字段名， 如：parent_Id"
+              placement="top"
+            >
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -104,7 +113,10 @@
         <el-form-item>
           <span slot="label">
             树名称字段
-            <el-tooltip content="树节点的显示名称字段名， 如：dept_name" placement="top">
+            <el-tooltip
+              content="树节点的显示名称字段名， 如：dept_name"
+              placement="top"
+            >
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -127,30 +139,30 @@ export default {
   props: {
     info: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
       rules: {
         tplCategory: [
-          { required: true, message: "请选择生成模板", trigger: "blur" }
+          { required: true, message: "请选择生成模板", trigger: "blur" },
         ],
         packageName: [
-          { required: true, message: "请输入生成包路径", trigger: "blur" }
+          { required: true, message: "请输入生成包路径", trigger: "blur" },
         ],
         moduleName: [
-          { required: true, message: "请输入生成模块名", trigger: "blur" }
+          { required: true, message: "请输入生成模块名", trigger: "blur" },
         ],
         businessName: [
-          { required: true, message: "请输入生成业务名", trigger: "blur" }
+          { required: true, message: "请输入生成业务名", trigger: "blur" },
         ],
         functionName: [
-          { required: true, message: "请输入生成功能名", trigger: "blur" }
-        ]
-      }
+          { required: true, message: "请输入生成功能名", trigger: "blur" },
+        ],
+      },
     };
   },
-  created() {}
+  created() {},
 };
 </script>

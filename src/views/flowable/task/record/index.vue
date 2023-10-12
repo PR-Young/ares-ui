@@ -162,15 +162,15 @@
       width="60%"
       append-to-body
     >
-    <el-row
-    ><el-col>
-      <el-input
-        type="textarea"
-        v-model="taskForm.comment"
-        placeholder="请输入处理意见"
-      />
-    </el-col>
-    </el-row>
+      <el-row
+        ><el-col>
+          <el-input
+            type="textarea"
+            v-model="taskForm.comment"
+            placeholder="请输入处理意见"
+          />
+        </el-col>
+      </el-row>
       <span slot="footer" class="dialog-footer">
         <el-row>
           <el-col style="margin-top: 5px">
@@ -245,32 +245,32 @@
       </span>
     </el-dialog>
 
-     <!--驳回流程new-->
-     <el-dialog
-     :title="rejectTitle"
-     :visible.sync="rejectOpenNew"
-     width="40%"
-     append-to-body
-   >
-     <el-form ref="taskForm" :model="taskForm" label-width="80px">
-       <el-form-item
-         label="意见"
-         prop="comment"
-         :rules="[{ required: true, message: '请输入意见', trigger: 'blur' }]"
-       >
-         <el-input
-           style="width: 100%"
-           type="textarea"
-           v-model="taskForm.comment"
-           placeholder="请输入意见"
-         />
-       </el-form-item>
-     </el-form>
-     <span slot="footer" class="dialog-footer">
-       <el-button @click="rejectOpenNew = false">取 消</el-button>
-       <el-button type="primary" @click="taskRejectNew">确 定</el-button>
-     </span>
-   </el-dialog>
+    <!--驳回流程new-->
+    <el-dialog
+      :title="rejectTitle"
+      :visible.sync="rejectOpenNew"
+      width="40%"
+      append-to-body
+    >
+      <el-form ref="taskForm" :model="taskForm" label-width="80px">
+        <el-form-item
+          label="意见"
+          prop="comment"
+          :rules="[{ required: true, message: '请输入意见', trigger: 'blur' }]"
+        >
+          <el-input
+            style="width: 100%"
+            type="textarea"
+            v-model="taskForm.comment"
+            placeholder="请输入意见"
+          />
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="rejectOpenNew = false">取 消</el-button>
+        <el-button type="primary" @click="taskRejectNew">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -291,7 +291,7 @@ import {
   getNextFlowNode,
   delegate,
   getFormData,
-  rejectTaskNew
+  rejectTaskNew,
 } from "@/api/flowable/todo";
 import flow from "@/views/flowable/task/record/flow";
 import { treeselect } from "@/api/system/dept";
@@ -364,7 +364,7 @@ export default {
       rejectOpen: false,
       rejectTitle: null,
       userData: [],
-      rejectOpenNew:false
+      rejectOpenNew: false,
     };
   },
   created() {
@@ -555,7 +555,7 @@ export default {
       //   this.msgError("请输入审批意见");
       //   return;
       // }
-      this.taskForm.values = {'approve':'同意'}
+      this.taskForm.values = { approve: "同意" };
       complete(this.taskForm).then((response) => {
         this.msgSuccess(response.msg);
         this.goBack();
@@ -597,7 +597,7 @@ export default {
     },
     /** 申请流程表单数据提交 */
     submitForm(data) {
-      debugger
+      debugger;
       if (data) {
         const variables = data.valData;
         const formData = data.formData;
@@ -640,8 +640,9 @@ export default {
     /** 驳回任务 */
     taskRejectNew() {
       this.$refs["taskForm"].validate((valid) => {
-        if (valid) {debugger
-          this.taskForm.values = {'approve':'拒绝'}
+        if (valid) {
+          debugger;
+          this.taskForm.values = { approve: "拒绝" };
           rejectTaskNew(this.taskForm).then((res) => {
             this.msgSuccess(res.msg);
             this.goBack();

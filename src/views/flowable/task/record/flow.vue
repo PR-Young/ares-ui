@@ -9,24 +9,24 @@
   </div>
 </template>
 <script>
-import bpmnModeler from '@/components/Process/index'
+import bpmnModeler from "@/components/Process/index";
 export default {
   name: "Flow",
   components: {
-    bpmnModeler
+    bpmnModeler,
   },
   props: {
     xmlData: {
       type: String,
-      default: ''
+      default: "",
     },
     taskData: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   data() {
     return {};
-  }
+  },
 };
 </script>

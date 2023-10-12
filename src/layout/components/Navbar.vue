@@ -81,7 +81,7 @@ export default {
     // setInterval(() => {
     //   store.dispatch("GetNoticeNumber");
     // }, 60 * 1000);
-    this.connectWebsocket()
+    this.connectWebsocket();
   },
   destroyed() {
     //clearInterval();
@@ -119,7 +119,7 @@ export default {
       });
     },
     connectWebsocket() {
-      let userAccount = this.$store.getters.userAccount
+      let userAccount = this.$store.getters.userAccount;
       let websocket;
       if (typeof WebSocket === "undefined") {
         console.log("您的浏览器不支持WebSocket");
@@ -130,8 +130,8 @@ export default {
         if (window.location.protocol == "https:") {
           protocol = "wss";
         }
-      
-        url = `${protocol}://localhost:8080/ares/ws/`+userAccount;
+
+        url = `${protocol}://localhost:8080/ares/ws/` + userAccount;
 
         // 打开一个websocket
         websocket = new WebSocket(url);
@@ -142,20 +142,20 @@ export default {
           console.log("websocket发送数据中");
         };
         // 客户端接收服务端返回的数据
-        websocket.onmessage = evt => {
-          this.$store.dispatch("updateNoticeNumber",evt.data)
+        websocket.onmessage = (evt) => {
+          this.$store.dispatch("updateNoticeNumber", evt.data);
           console.log("websocket返回的数据:", evt);
         };
         // 发生错误时
-        websocket.onerror = evt => {
+        websocket.onerror = (evt) => {
           console.log("websocket错误:", evt);
         };
         // 关闭连接
-        websocket.onclose = evt => {
+        websocket.onclose = (evt) => {
           console.log("websocket关闭:", evt);
         };
       }
-    }
+    },
   },
 };
 </script>
