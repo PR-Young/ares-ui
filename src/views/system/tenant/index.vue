@@ -149,7 +149,7 @@
         />
 
         <!-- 添加或修改岗位对话框 -->
-        <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+        <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
                     <el-form-item label="租户名" prop="tenantName">
                         <el-input v-model="form.tenantName" placeholder="请输入租户名"/>
@@ -166,16 +166,16 @@
                               >{{dict.dictLabel}}</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="角色">
-                        <el-select v-model="form.roleIds" multiple placeholder="请选择">
-                        <el-option
-                              v-for="item in roleOptions"
-                              :key="item.id"
-                              :label="item.roleName"
-                              :value="item.id"
-                        ></el-option>
-                        </el-select>
-                    </el-form-item>
+                    <el-form-item label="用户">
+                        <el-transfer
+                          filterable
+                          :titles="titleOptions"
+                          filter-placeholder
+                          :data="userOptions"
+                          v-model="selectedUsers"
+                          @right-check-change="change"
+                        ></el-transfer>
+                      </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -210,12 +210,14 @@
                 total: 0,
                 // 岗位表格数据
                 sysTenantsList: [],
-                // 角色选项
-                roleOptions: [],
+                // 用户选项
+                userOptions: [],
+                selectedUsers: [],
                 // 弹出层标题
                 title: "",
                 // 是否显示弹出层
                 open: false,
+                titleOptions: ["未选择", "已选择"],
                 // 状态数据字典
                 statusOptions: [
                     { dictValue: '0', dictLabel: "启用" },
@@ -258,6 +260,9 @@
                 this.open = false;
                 this.reset();
             },
+            change() {
+                for (let i = 0; i < this.selectedUsers.length; i++) {}
+            },
             // 表单重置
             reset() {
                 this.form = {
@@ -288,9 +293,19 @@
             handleAdd() {
                 this.reset();
                 getSysTenants().then((response) => {
-                    this.roleOptions = response.roles;
                     this.open = true;
                     this.title = "添加租户";
+                    this.userOptions = [];
+                    this.selectedUsers = [];
+                    let data = response.allUser;
+                    data.forEach((item) => {                       
+                        this.userOptions.push({
+                            label: item.userName,
+                            key: item.id,
+                            user: item.userName,
+                            disabled: item.disabled === 0
+                        });
+                    });
                 });
                 
             },
@@ -300,16 +315,30 @@
                 const id = row.id || this.ids;
                 getSysTenants(id).then((response) => {
                     this.form = response.data;
-                    this.form.roleIds =  response.roleIds;
-                    this.roleOptions = response.roles;
                     this.open = true;
                     this.title = "修改租户";
+                    this.userOptions = [];
+                    this.selectedUsers = [];
+                    let data = response.allUser;
+                    data.forEach((item) => {                       
+                        this.userOptions.push({
+                            label: item.userName,
+                            key: item.id,
+                            user: item.userName,
+                            //disabled: item.disabled === 0
+                        });                        
+                    });
+                    let checked = response.checkedKeys;
+                    checked.forEach((item) => {
+                        this.selectedUsers.push(item);
+                    });
                 });
             },
             /** 提交按钮 */
             submitForm: function () {
                 this.$refs["form"].validate((valid) => {
                     if (valid) {
+                        this.form.userIds = this.selectedUsers;
                         if (this.form.id != undefined) {
                             updateSysTenants(this.form).then((response) => {
                                 if (response.code === 200) {
