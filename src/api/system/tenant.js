@@ -16,7 +16,7 @@ export function getSysTenants(id) {
     url: '/ares/sysTenants/' + praseStrEmpty(id),
     method: 'get'
   })
-} ß
+}
 
 // 新增
 export function addSysTenants(data) {
